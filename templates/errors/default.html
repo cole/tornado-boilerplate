@@ -1,0 +1,9 @@
+{% extends "../base.html" %}
+
+{% block title %}{{ _("Error") }} {{ _(unicode(code)) }} &mdash; {{ _("ProjectName") }}{% end %}
+
+{% block page_title %}{{ _(unicode(code)) }}{% end %}
+
+{% block content %}
+    <p>{{ _(unicode(message)) }}</p>
+{% end %}

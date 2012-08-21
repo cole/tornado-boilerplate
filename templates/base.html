@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="{{ locale.code }}">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{{ _("ProjectName") }}{% end %}</title>
+
+  {% block site_css %}{% end %}
+  {% block page_css %}{% end %}
+
+  {% block extra_head %}{% end %}
+</head>
+
+<body>
+  {% block page_nav %}{% end %}
+	{% block page_title %}{% end %}
+	{% block notice %}{% end %}
+	{% if 'flash' in globals() %}
+    <p class="flash{% if flash['notice'] %} notice">{{ flash['notice'] }}{% end %}{% if flash['error'] %} error">{{ flash['error'] }}{% end %}</p>
+	{% end %}
+  {% block content %}{% end %}
+	{% block footer %}{% end %}
+  {% block site_js_files %}{% end %}
+  {% block site_js %}{% end %}
+  {% block page_js_files %}{% end %}
+  {% block page_js %}{% end %}
+</body>
+</html>
