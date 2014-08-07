@@ -2,26 +2,35 @@
 <html lang="{{ locale.code }}">
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}{{ _("ProjectName") }}{% end %}</title>
-
-  {% block site_css %}{% end %}
-  {% block page_css %}{% end %}
-
+  <title>{% block title %}{{ _("TornadoBoilerplate") }}{% end %}</title>
+  {% block meta %}
+  <meta name="description" content="blah blah blah">
+  {% end %}
+  {% block site_stylesheets %}
+  <link rel="stylesheet" href="{{ static_url('stylesheets/normalize.css') }}">
+  <link rel="stylesheet" href="{{ static_url('stylesheets/main.css') }}">
+  {% end %}
+  {% block page_stylesheets %}{% end %}
   {% block extra_head %}{% end %}
 </head>
 
 <body>
+  {% block browsehappy %}
+  <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  {% end %}
   {% block page_nav %}{% end %}
-	{% block page_title %}{% end %}
-	{% block notice %}{% end %}
-	{% if 'flash' in globals() %}
-    <p class="flash{% if flash['notice'] %} notice">{{ flash['notice'] }}{% end %}{% if flash['error'] %} error">{{ flash['error'] }}{% end %}</p>
-	{% end %}
-  {% block content %}{% end %}
-	{% block footer %}{% end %}
-  {% block site_js_files %}{% end %}
-  {% block site_js %}{% end %}
-  {% block page_js_files %}{% end %}
-  {% block page_js %}{% end %}
+  {% block page_title %}<h1>TornadoBoilerplate</h1>{% end %}
+  {% block notice %}{% end %}
+  {% block content %}You&#39;re up and running!{% end %}
+  {% block footer %}{% end %}
+  {% block site_javascript_files %}
+  <script src="{{ static_url('javascript/vendor/jquery-2.1.1.min.js') }}"></script>
+  <script src="{{ static_url('javascript/main.js') }}"></script>
+  {% end %}
+  {% block site_javascript %}{% end %}
+  {% block page_javascript_files %}{% end %}
+  {% block page_javascript %}{% end %}
 </body>
 </html>

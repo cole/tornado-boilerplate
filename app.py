@@ -1,30 +1,30 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # app.py
-# ProjectName
+# TornadoBoilerplate
 #
-# Copyright 2012 Cole Maclean
+# Copyright 2014 Cole Maclean
 
-import tornado.database
 import tornado.httpserver
 import tornado.ioloop
-import tornado.options
+import tornado.netutil
 import tornado.web
 from tornado.options import define, options
 
-from settings import settings
+from settings import settings, locale_path
 from urls import url_patterns
 
-class Application(tornado.web.Application):
-	"""Initialize our app, set up URLs and settings."""
-	def __init__(self):
-		tornado.web.Application.__init__(self, url_patterns, **settings)
+def run_server():
+    """Run the server."""
+    sockets = tornado.netutil.bind_sockets(options.port, address=options.ip)
+    if options.processes != 1:
+        tornado.process.fork_processes(options.processes)
+    application = tornado.web.Application(url_patterns, **settings)
+    httpserver = tornado.httpserver.HTTPServer(application)
+    httpserver.add_sockets(sockets)
+    tornado.locale.load_translations(locale_path)
+    ioloop = tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":
-	"""Run the server."""
-	application = Application()
-	tornado.locale.load_translations(application.settings.get("locale_path"))
-	http_server = tornado.httpserver.HTTPServer(application)
-	http_server.listen(options.port, address=options.ip)
-	io_loop = tornado.ioloop.IOLoop.instance()
-	io_loop.start()
+    run_server()
+    

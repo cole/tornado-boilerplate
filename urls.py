@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # urls.py
-# ProjectName
+# TornadoBoilerplate
 #
-# Copyright 2012 Cole Maclean
+# Copyright 2014 Cole Maclean
 
-from tornado.web import URLSpec, ErrorHandler
-from handlers import *
+from tornado.web import url
+from handlers import MainHandler, NotFoundHandler
 
 url_patterns = [
-    URLSpec(r"/", MainHandler, name="root"),
+    url(r"/", MainHandler, name="root"),
+    url(r"/(.*)", NotFoundHandler, name='404') # should always be last
 ]
